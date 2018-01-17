@@ -25,10 +25,10 @@ Interested in API docs? You can check out the [Philips API documentation](http:/
 
 ## Requirements
 
-* PHP 5.6+
+* PHP 7.1+
 * cURL extension (optional)
 
-For PHP 5.3 support, please use Phue v1.6.x.
+For old php support please use the original package sqmk/Phue
 
 ## Installation
 
