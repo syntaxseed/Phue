@@ -1,7 +1,6 @@
-# Phue - Philips Hue client
+# Phue - Philips Hue client - fork by Neoteknic
 
-[![Latest Stable Version](https://poser.pugx.org/sqmk/Phue/version)](https://packagist.org/packages/sqmk/Phue)
-[![Build Status](https://api.travis-ci.org/sqmk/Phue.svg?branch=master)](https://travis-ci.org/sqmk/Phue)
+[![Latest OrigStable Version](https://poser.pugx.org/neoteknic/Phue/version)](https://packagist.org/packages/neoteknic/Phue)
 
 
 ## Introduction
