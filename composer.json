@@ -1,6 +1,6 @@
 {
-    "name": "sqmk/phue",
-    "description": "Phue - Philips Hue PHP client",
+    "name": "neoteknic/phue",
+    "description": "Phue - Philips Hue PHP client - Fork by Neoteknic - extra features",
     "type": "library",
     "keywords": [
         "phue",
@@ -8,7 +8,7 @@
         "hue",
         "client"
     ],
-    "homepage": "http://github.com/sqmk/Phue",
+    "homepage": "https://github.com/neoteknic/Phue",
     "license": "BSD-3-Clause",
     "authors": [
         {
@@ -18,11 +18,11 @@
         }
     ],
     "require": {
-        "php": ">=5.6.0"
+        "php": ">=7.1.0"
     },
     "require-dev": {
         "mockery/mockery": "1.0.0",
-        "phpunit/PHPUnit": "5.7.25",
+        "phpunit/PHPUnit": "6.*",
         "squizlabs/php_codesniffer": "3.1.1"
     },
     "suggest": {
