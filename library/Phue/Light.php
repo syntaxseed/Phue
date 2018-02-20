@@ -247,7 +247,7 @@ class Light implements LightInterface {
      * @return int Hue value
      */
     public function getHue() {
-        return ($this->attributes->state->hue ?: null);
+        return (isset($this->attributes->state->hue) ? $this->attributes->state->hue : null);
     }
 
     /**
@@ -276,7 +276,7 @@ class Light implements LightInterface {
      * @return int Saturation value
      */
     public function getSaturation() {
-        return ($this->attributes->state->sat ?: null);
+        return (isset($this->attributes->state->sat) ? $this->attributes->state->sat : null);
     }
 
     /**
@@ -306,8 +306,8 @@ class Light implements LightInterface {
      */
     public function getXY() {
         return [
-            'x' => ($this->attributes->state->xy[0] ?: 1),
-            'y' => ($this->attributes->state->xy[1] ?: 1),
+            'x' => (isset($this->attributes->state->xy) ? $this->attributes->state->xy[0] : 1),
+            'y' => (isset($this->attributes->state->xy) ? $this->attributes->state->xy[1] : 1),
         ];
     }
 
