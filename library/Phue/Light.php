@@ -166,7 +166,7 @@ class Light implements LightInterface {
      * @return string Alert mode
      */
     public function getAlert() {
-        return $this->attributes->state->alert;
+        return (isset($this->attributes->state->alert) ? $this->attributes->state->alert : null);
     }
 
     /**
@@ -193,7 +193,7 @@ class Light implements LightInterface {
      * @return string effect mode
      */
     public function getEffect() {
-        return $this->attributes->state->effect;
+        return (isset($this->attributes->state->effect) ? $this->attributes->state->effect : null);
     }
 
     /**
@@ -220,7 +220,7 @@ class Light implements LightInterface {
      * @return int Brightness level
      */
     public function getBrightness() {
-        return $this->attributes->state->bri;
+        return (isset($this->attributes->state->bri) ? $this->attributes->state->bri : null);
     }
 
     /**
@@ -381,7 +381,7 @@ class Light implements LightInterface {
      * @return int Color temperature value
      */
     public function getColorTemp() {
-        return $this->attributes->state->ct;
+        return (isset($this->attributes->state->ct) ? $this->attributes->state->ct : null);
     }
 
     /**
