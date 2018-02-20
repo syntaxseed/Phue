@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2012 Michael K. Squires
  * @license   http://github.com/sqmk/Phue/wiki/License
  */
+
 namespace Phue;
 
 use Phue\Command\SetLightState;
@@ -16,8 +17,7 @@ use Phue\LightModel\LightModelFactory;
 /**
  * Light object
  */
-class Light implements LightInterface
-{
+class Light implements LightInterface {
     /**
      * Id
      *
@@ -42,15 +42,14 @@ class Light implements LightInterface
     /**
      * Construct a Phue Light object
      *
-     * @param int $id
+     * @param int       $id
      *            Id
      * @param \stdClass $attributes
      *            Light attributes
-     * @param Client $client
+     * @param Client    $client
      *            Phue client
      */
-    public function __construct($id, \stdClass $attributes, Client $client)
-    {
+    public function __construct($id, \stdClass $attributes, Client $client) {
         $this->id = (int) $id;
         $this->attributes = $attributes;
         $this->client = $client;
@@ -61,8 +60,7 @@ class Light implements LightInterface
      *
      * @return int Light id
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -71,8 +69,7 @@ class Light implements LightInterface
      *
      * @return string Name of light
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->attributes->name;
     }
 
@@ -83,8 +80,7 @@ class Light implements LightInterface
      *
      * @return self This object
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->client->sendCommand(new Command\SetLightName($this, (string) $name));
 
         $this->attributes->name = (string) $name;
@@ -97,8 +93,7 @@ class Light implements LightInterface
      *
      * @return string Type
      */
-    public function getType()
-    {
+    public function getType() {
         return $this->attributes->type;
     }
 
@@ -107,8 +102,7 @@ class Light implements LightInterface
      *
      * @return string Model Id
      */
-    public function getModelId()
-    {
+    public function getModelId() {
         return $this->attributes->modelid;
     }
 
@@ -117,8 +111,7 @@ class Light implements LightInterface
      *
      * @return AbstractLightModel Light model
      */
-    public function getModel()
-    {
+    public function getModel() {
         return LightModelFactory::build($this->getModelId());
     }
 
@@ -127,8 +120,7 @@ class Light implements LightInterface
      *
      * @return string Unique Id
      */
-    public function getUniqueId()
-    {
+    public function getUniqueId() {
         return $this->attributes->uniqueid;
     }
 
@@ -137,8 +129,7 @@ class Light implements LightInterface
      *
      * @return string
      */
-    public function getSoftwareVersion()
-    {
+    public function getSoftwareVersion() {
         return $this->attributes->swversion;
     }
 
@@ -147,8 +138,7 @@ class Light implements LightInterface
      *
      * @return bool True if on, false if not
      */
-    public function isOn()
-    {
+    public function isOn() {
         return (bool) $this->attributes->state->on;
     }
 
@@ -160,8 +150,7 @@ class Light implements LightInterface
      *
      * @return self This object
      */
-    public function setOn($flag = true)
-    {
+    public function setOn($flag = TRUE) {
         $x = new SetLightState($this);
         $y = $x->on((bool) $flag);
         $this->client->sendCommand($y);
@@ -176,8 +165,7 @@ class Light implements LightInterface
      *
      * @return string Alert mode
      */
-    public function getAlert()
-    {
+    public function getAlert() {
         return $this->attributes->state->alert;
     }
 
@@ -189,8 +177,7 @@ class Light implements LightInterface
      *
      * @return self This object
      */
-    public function setAlert($mode = SetLightState::ALERT_LONG_SELECT)
-    {
+    public function setAlert($mode = SetLightState::ALERT_LONG_SELECT) {
         $x = new SetLightState($this);
         $y = $x->alert($mode);
         $this->client->sendCommand($y);
@@ -205,8 +192,7 @@ class Light implements LightInterface
      *
      * @return string effect mode
      */
-    public function getEffect()
-    {
+    public function getEffect() {
         return $this->attributes->state->effect;
     }
 
@@ -218,8 +204,7 @@ class Light implements LightInterface
      *
      * @return self This object
      */
-    public function setEffect($mode = SetLightState::EFFECT_NONE)
-    {
+    public function setEffect($mode = SetLightState::EFFECT_NONE) {
         $x = new SetLightState($this);
         $y = $x->effect($mode);
         $this->client->sendCommand($y);
@@ -234,8 +219,7 @@ class Light implements LightInterface
      *
      * @return int Brightness level
      */
-    public function getBrightness()
-    {
+    public function getBrightness() {
         return $this->attributes->state->bri;
     }
 
@@ -247,8 +231,7 @@ class Light implements LightInterface
      *
      * @return self This object
      */
-    public function setBrightness($level = SetLightState::BRIGHTNESS_MAX)
-    {
+    public function setBrightness($level = SetLightState::BRIGHTNESS_MAX) {
         $x = new SetLightState($this);
         $y = $x->brightness((int) $level);
         $this->client->sendCommand($y);
@@ -263,9 +246,8 @@ class Light implements LightInterface
      *
      * @return int Hue value
      */
-    public function getHue()
-    {
-        return $this->attributes->state->hue;
+    public function getHue() {
+        return ($this->attributes->state->hue ?: null);
     }
 
     /**
@@ -276,8 +258,7 @@ class Light implements LightInterface
      *
      * @return self This object
      */
-    public function setHue($value)
-    {
+    public function setHue($value) {
         $x = new SetLightState($this);
         $y = $x->hue((int) $value);
         $this->client->sendCommand($y);
@@ -294,9 +275,8 @@ class Light implements LightInterface
      *
      * @return int Saturation value
      */
-    public function getSaturation()
-    {
-        return $this->attributes->state->sat;
+    public function getSaturation() {
+        return ($this->attributes->state->sat ?: null);
     }
 
     /**
@@ -307,8 +287,7 @@ class Light implements LightInterface
      *
      * @return self This object
      */
-    public function setSaturation($value)
-    {
+    public function setSaturation($value) {
         $x = new SetLightState($this);
         $y = $x->saturation((int) $value);
         $this->client->sendCommand($y);
@@ -325,12 +304,11 @@ class Light implements LightInterface
      *
      * @return array X, Y key/value
      */
-    public function getXY()
-    {
-        return array(
-            'x' => $this->attributes->state->xy[0],
-            'y' => $this->attributes->state->xy[1]
-        );
+    public function getXY() {
+        return [
+            'x' => ($this->attributes->state->xy[0] ?: 1),
+            'y' => ($this->attributes->state->xy[1] ?: 1),
+        ];
     }
 
     /**
@@ -343,17 +321,16 @@ class Light implements LightInterface
      *
      * @return self This object
      */
-    public function setXY($x, $y)
-    {
+    public function setXY($x, $y) {
         $_x = new SetLightState($this);
         $_y = $_x->xy((float) $x, (float) $y);
         $this->client->sendCommand($_y);
 
         // Change both internal xy and colormode state
-        $this->attributes->state->xy = array(
+        $this->attributes->state->xy = [
             $x,
-            $y
-        );
+            $y,
+        ];
         $this->attributes->state->colormode = 'xy';
 
         return $this;
@@ -364,9 +341,8 @@ class Light implements LightInterface
      *
      * @return array red, green, blue key/value
      */
-    public function getRGB()
-    {
-        $xy  = $this->getXY();
+    public function getRGB() {
+        $xy = $this->getXY();
         $bri = $this->getBrightness();
         $rgb = ColorConversion::convertXYToRGB($xy['x'], $xy['y'], $bri);
 
@@ -382,18 +358,17 @@ class Light implements LightInterface
      *
      * @return self This object
      */
-    public function setRGB($red, $green, $blue)
-    {
+    public function setRGB($red, $green, $blue) {
         $x = new SetLightState($this);
         $y = $x->rgb((int) $red, (int) $green, (int) $blue);
         $this->client->sendCommand($y);
 
         // Change internal xy, brightness and colormode state
         $xy = ColorConversion::convertRGBToXY($red, $green, $blue);
-        $this->attributes->state->xy = array(
+        $this->attributes->state->xy = [
             $xy['x'],
-            $xy['y']
-        );
+            $xy['y'],
+        ];
         $this->attributes->state->bri = $xy['bri'];
         $this->attributes->state->colormode = 'xy';
 
@@ -405,8 +380,7 @@ class Light implements LightInterface
      *
      * @return int Color temperature value
      */
-    public function getColorTemp()
-    {
+    public function getColorTemp() {
         return $this->attributes->state->ct;
     }
 
@@ -417,8 +391,7 @@ class Light implements LightInterface
      *
      * @return self This object
      */
-    public function setColorTemp($value)
-    {
+    public function setColorTemp($value) {
         $x = new SetLightState($this);
         $y = $x->colorTemp((int) $value);
         $this->client->sendCommand($y);
@@ -435,11 +408,10 @@ class Light implements LightInterface
      *
      * @return string Color mode
      */
-    public function getColorMode()
-    {
+    public function getColorMode() {
         return property_exists($this->attributes->state, 'colormode')
             ? $this->attributes->state->colormode
-            : null;
+            : NULL;
     }
 
     /**
@@ -447,8 +419,7 @@ class Light implements LightInterface
      *
      * @return bool
      */
-    public function isReachable()
-    {
+    public function isReachable() {
         return $this->attributes->state->reachable;
     }
 
@@ -457,8 +428,7 @@ class Light implements LightInterface
      *
      * @return string Light Id
      */
-    public function __toString()
-    {
+    public function __toString() {
         return (string) $this->getId();
     }
 }

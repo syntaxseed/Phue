@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2012 Michael K. Squires
  * @license   http://github.com/sqmk/Phue/wiki/License
  */
+
 namespace Phue;
 
 use Phue\Command\CommandInterface;
@@ -24,28 +25,27 @@ use Phue\Transport\TransportInterface;
 /**
  * Client for connecting to Philips Hue bridge
  */
-class Client
-{
+class Client {
     /**
      * Host address
      *
      * @var string
      */
-    protected $host = null;
+    protected $host;
 
     /**
      * Username
      *
      * @var string
      */
-    protected $username = null;
+    protected $username;
 
     /**
      * Transport
      *
      * @var TransportInterface
      */
-    protected $transport = null;
+    protected $transport;
 
     /**
      * Construct a Phue Client
@@ -55,8 +55,7 @@ class Client
      * @param string $username
      *            Username
      */
-    public function __construct($host, $username = null)
-    {
+    public function __construct(string $host, ?string $username = NULL) {
         $this->setHost($host);
         $this->setUsername($username);
     }
@@ -66,8 +65,7 @@ class Client
      *
      * @return string Host address
      */
-    public function getHost()
-    {
+    public function getHost() : string {
         return $this->host;
     }
 
@@ -79,10 +77,8 @@ class Client
      *
      * @return self This object
      */
-    public function setHost($host)
-    {
+    public function setHost(string $host) : Client {
         $this->host = (string) $host;
-
         return $this;
     }
 
@@ -91,8 +87,7 @@ class Client
      *
      * @return string Username
      */
-    public function getUsername()
-    {
+    public function getUsername() : ?string {
         return $this->username;
     }
 
@@ -104,10 +99,8 @@ class Client
      *
      * @return self This object
      */
-    public function setUsername($username)
-    {
+    public function setUsername(string $username) : Client {
         $this->username = (string) $username;
-
         return $this;
     }
 
@@ -116,8 +109,7 @@ class Client
      *
      * @return Bridge Bridge object
      */
-    public function getBridge()
-    {
+    public function getBridge() : Bridge {
         return $this->sendCommand(new GetBridge());
     }
 
@@ -126,8 +118,7 @@ class Client
      *
      * @return User[] List of User objects
      */
-    public function getUsers()
-    {
+    public function getUsers() : array {
         return $this->sendCommand(new GetUsers());
     }
 
@@ -136,8 +127,7 @@ class Client
      *
      * @return Light[] List of Light objects
      */
-    public function getLights()
-    {
+    public function getLights() : array {
         return $this->sendCommand(new GetLights());
     }
 
@@ -146,8 +136,7 @@ class Client
      *
      * @return Group[] List of Group objects
      */
-    public function getGroups()
-    {
+    public function getGroups() : array {
         return $this->sendCommand(new GetGroups());
     }
 
@@ -156,8 +145,7 @@ class Client
      *
      * @return Schedule[] List of Schedule objects
      */
-    public function getSchedules()
-    {
+    public function getSchedules() : array {
         return $this->sendCommand(new GetSchedules());
     }
 
@@ -166,8 +154,7 @@ class Client
      *
      * @return Scene[] List of Scene objects
      */
-    public function getScenes()
-    {
+    public function getScenes() : array {
         return $this->sendCommand(new GetScenes());
     }
 
@@ -176,8 +163,7 @@ class Client
      *
      * @return Sensor[] List of Sensor objects
      */
-    public function getSensors()
-    {
+    public function getSensors() : array {
         return $this->sendCommand(new GetSensors());
     }
 
@@ -186,8 +172,7 @@ class Client
      *
      * @return Rule[] List of Rule objects
      */
-    public function getRules()
-    {
+    public function getRules() : array {
         return $this->sendCommand(new GetRules());
     }
 
@@ -196,8 +181,7 @@ class Client
      *
      * @return array List of timezones
      */
-    public function getTimezones()
-    {
+    public function getTimezones() : array {
         return $this->sendCommand(new GetTimezones());
     }
 
@@ -206,13 +190,11 @@ class Client
      *
      * @return TransportInterface Transport
      */
-    public function getTransport()
-    {
+    public function getTransport() : TransportInterface {
         // Set transport if haven't
-        if ($this->transport === null) {
+        if ($this->transport === NULL) {
             $this->setTransport(new Http($this));
         }
-
         return $this->transport;
     }
 
@@ -224,10 +206,8 @@ class Client
      *
      * @return self This object
      */
-    public function setTransport(TransportInterface $transport)
-    {
+    public function setTransport(TransportInterface $transport) : Client {
         $this->transport = $transport;
-
         return $this;
     }
 
@@ -239,8 +219,7 @@ class Client
      *
      * @return mixed Command result
      */
-    public function sendCommand(CommandInterface $command)
-    {
+    public function sendCommand(CommandInterface $command) {
         return $command->send($this);
     }
 }
