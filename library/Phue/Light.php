@@ -39,6 +39,8 @@ class Light implements LightInterface
      */
     protected $client;
 
+	protected $transition;
+
     /**
      * Construct a Phue Light object
      *
@@ -54,6 +56,7 @@ class Light implements LightInterface
         $this->id = (int) $id;
         $this->attributes = $attributes;
         $this->client = $client;
+	    $this->transition=null;
     }
 
     /**
@@ -164,6 +167,7 @@ class Light implements LightInterface
     {
         $x = new SetLightState($this);
         $y = $x->on((bool) $flag);
+        $this->updateTransition($x);
         $this->client->sendCommand($y);
 
         $this->attributes->state->on = (bool) $flag;
@@ -193,6 +197,7 @@ class Light implements LightInterface
     {
         $x = new SetLightState($this);
         $y = $x->alert($mode);
+	    $this->updateTransition($x);
         $this->client->sendCommand($y);
 
         $this->attributes->state->alert = $mode;
@@ -222,6 +227,7 @@ class Light implements LightInterface
     {
         $x = new SetLightState($this);
         $y = $x->effect($mode);
+	    $this->updateTransition($x);
         $this->client->sendCommand($y);
 
         $this->attributes->state->effect = $mode;
@@ -251,6 +257,7 @@ class Light implements LightInterface
     {
         $x = new SetLightState($this);
         $y = $x->brightness((int) $level);
+	    $this->updateTransition($x);
         $this->client->sendCommand($y);
 
         $this->attributes->state->bri = (int) $level;
@@ -280,6 +287,7 @@ class Light implements LightInterface
     {
         $x = new SetLightState($this);
         $y = $x->hue((int) $value);
+	    $this->updateTransition($x);
         $this->client->sendCommand($y);
 
         // Change both hue and color mode state
@@ -311,6 +319,7 @@ class Light implements LightInterface
     {
         $x = new SetLightState($this);
         $y = $x->saturation((int) $value);
+	    $this->updateTransition($x);
         $this->client->sendCommand($y);
 
         // Change both saturation and color mode state
@@ -347,6 +356,7 @@ class Light implements LightInterface
     {
         $_x = new SetLightState($this);
         $_y = $_x->xy((float) $x, (float) $y);
+	    $this->updateTransition($_x);
         $this->client->sendCommand($_y);
 
         // Change both internal xy and colormode state
@@ -386,6 +396,7 @@ class Light implements LightInterface
     {
         $x = new SetLightState($this);
         $y = $x->rgb((int) $red, (int) $green, (int) $blue);
+        $this->updateTransition($x);
         $this->client->sendCommand($y);
 
         // Change internal xy, brightness and colormode state
@@ -398,6 +409,21 @@ class Light implements LightInterface
         $this->attributes->state->colormode = 'xy';
 
         return $this;
+    }
+
+	/**
+	 * @param $time float Seconds
+	 */
+	public function setTransition($time)
+	{
+		$this->transition=$time;
+    }
+
+	private function updateTransition(SetLightState $x)
+	{
+		if($this->transition!==null){
+			$x->transitionTime($this->transition);
+		}
     }
 
     /**
