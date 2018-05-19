@@ -29,7 +29,7 @@ class ColorConversion
         $normalizedToOne['red'] = $red / 255;
         $normalizedToOne['green'] = $green / 255;
         $normalizedToOne['blue'] = $blue / 255;
-
+        
         // Make colors more vivid
         foreach ($normalizedToOne as $key => $normalized) {
             if ($normalized > 0.04045) {
@@ -38,12 +38,12 @@ class ColorConversion
                 $color[$key] = $normalized / 12.92;
             }
         }
-
+        
         // Convert to XYZ using the Wide RGB D65 formula
         $xyz['x'] = $color['red'] * 0.664511 + $color['green'] * 0.154324 + $color['blue'] * 0.162028;
         $xyz['y'] = $color['red'] * 0.283881 + $color['green'] * 0.668433 + $color['blue'] * 0.047685;
         $xyz['z'] = $color['red'] * 0.000000 + $color['green'] * 0.072310 + $color['blue'] * 0.986039;
-
+        
         // Calculate the x/y values
         if (array_sum($xyz) == 0) {
             $x = 0;
@@ -52,7 +52,7 @@ class ColorConversion
             $x = $xyz['x'] / array_sum($xyz);
             $y = $xyz['y'] / array_sum($xyz);
         }
-
+        
         return array(
             'x'   => $x,
             'y'   => $y,
