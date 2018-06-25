@@ -354,10 +354,10 @@ class Group implements LightInterface
      *
      * @return self This object
      */
-    public function setRGB($red, $green, $blue)
+    public function setRGB($red, $green, $blue,$bri=null)
     {
         $x = new SetGroupState($this);
-        $y = $x->rgb((int) $red, (int) $green, (int) $blue);
+        $y = $x->rgb((int) $red, (int) $green, (int) $blue,$bri);
         $this->client->sendCommand($y);
 
         // Change internal xy, brightness and colormode state
@@ -366,7 +366,13 @@ class Group implements LightInterface
             $xy['x'],
             $xy['y']
         );
-        $this->attributes->action->bri = $xy['bri'];
+        if($bri===null){
+	        $this->attributes->action->bri = $bri;
+        }
+        else{
+	        $this->attributes->action->bri = $xy['bri'];
+        }
+
         $this->attributes->action->colormode = 'xy';
 
         return $this;
