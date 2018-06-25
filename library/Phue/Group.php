@@ -41,6 +41,8 @@ class Group implements LightInterface
      */
     protected $client;
 
+	protected $transition;
+
     /**
      * Construct a Phue Group object
      *
@@ -163,6 +165,7 @@ class Group implements LightInterface
     {
         $x = new SetGroupState($this);
         $y = $x->on((bool) $flag);
+	    $this->updateTransition($x);
         $this->client->sendCommand($y);
 
         $this->attributes->action->on = (bool) $flag;
@@ -190,6 +193,7 @@ class Group implements LightInterface
     public function setAlert($mode = SetLightState::ALERT_LONG_SELECT)
     {
         $x = new SetGroupState($this);
+	    $this->updateTransition($x);
         $y = $x->alert($mode);
         $this->client->sendCommand($y);
         $this->attributes->action->alert = $mode;
@@ -218,6 +222,7 @@ class Group implements LightInterface
     public function setBrightness($level = SetLightState::BRIGHTNESS_MAX)
     {
         $x = new SetGroupState($this);
+	    $this->updateTransition($x);
         $y = $x->brightness((int) $level);
         $this->client->sendCommand($y);
 
@@ -247,6 +252,7 @@ class Group implements LightInterface
     public function setHue($value)
     {
         $x = new SetGroupState($this);
+	    $this->updateTransition($x);
         $y = $x->hue((int) $value);
         $this->client->sendCommand($y);
 
@@ -278,6 +284,7 @@ class Group implements LightInterface
     public function setSaturation($value)
     {
         $x = new SetGroupState($this);
+	    $this->updateTransition($x);
         $y = $x->saturation((int) $value);
         $this->client->sendCommand($y);
 
@@ -318,6 +325,7 @@ class Group implements LightInterface
     public function setXY($x, $y)
     {
         $_x = new SetGroupState($this);
+	    $this->updateTransition($_x);
         $_y = $_x->xy((float) $x, (float) $y);
         $this->client->sendCommand($_y);
 
@@ -345,18 +353,21 @@ class Group implements LightInterface
         return $rgb;
     }
 
-    /**
-     * Set XY and brightness calculated from RGB
-     *
-     * @param int $red   Red value
-     * @param int $green Green value
-     * @param int $blue  Blue value
-     *
-     * @return self This object
-     */
+	/**
+	 * Set XY and brightness calculated from RGB
+	 *
+	 * @param int $red Red value
+	 * @param int $green Green value
+	 * @param int $blue Blue value
+	 *
+	 * @param int $bri Brightness if needed
+	 *
+	 * @return self This object
+	 */
     public function setRGB($red, $green, $blue,$bri=null)
     {
         $x = new SetGroupState($this);
+	    $this->updateTransition($x);
         $y = $x->rgb((int) $red, (int) $green, (int) $blue,$bri);
         $this->client->sendCommand($y);
 
@@ -464,6 +475,21 @@ class Group implements LightInterface
 
         return $this;
     }
+
+	/**
+	 * @param $time float Seconds
+	 */
+	public function setTransition($time)
+	{
+		$this->transition=$time;
+	}
+
+	private function updateTransition(SetLightState $x)
+	{
+		if($this->transition!==null){
+			$x->transitionTime($this->transition);
+		}
+	}
 
     /**
      * Delete group
