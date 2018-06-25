@@ -389,10 +389,11 @@ class Light implements LightInterface
      * @param int $red   Red value
      * @param int $green Green value
      * @param int $blue  Blue value
+     * @param int $blue  Brightness value
      *
      * @return self This object
      */
-    public function setRGB($red, $green, $blue)
+    public function setRGB($red, $green, $blue,$bri=null)
     {
         $x = new SetLightState($this);
         $y = $x->rgb((int) $red, (int) $green, (int) $blue);
@@ -405,7 +406,17 @@ class Light implements LightInterface
             $xy['x'],
             $xy['y']
         );
-        $this->attributes->state->bri = $xy['bri'];
+        if($bri!==null){
+        	if($bri<0)
+        		$bri=0;
+        	elseif($bri>255)
+		        $bri=255;
+	        $this->attributes->state->bri = $bri;
+        }
+        else{
+	        $this->attributes->state->bri = $xy['bri'];
+        }
+
         $this->attributes->state->colormode = 'xy';
 
         return $this;

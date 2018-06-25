@@ -66,9 +66,9 @@ class Bridge
     {
         $this->client->sendCommand(
             new SetBridgeConfig(
-                array(
+                [
                     'name' => (string) $name
-                )
+                ]
             )
         );
         

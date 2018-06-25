@@ -198,8 +198,8 @@ class SoftwareUpdate
             )
         );
         
-                $this->attributes->notify = false;
-        
-                return $this;
+        $this->attributes->notify = false;
+
+        return $this;
     }
 }
