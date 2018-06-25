@@ -293,7 +293,7 @@ class SetLightState implements CommandInterface, ActionableInterface
      *
      * @return self This object
      */
-    public function rgb($red, $green, $blue)
+    public function rgb($red, $green, $blue,$bri=null)
     {
         // Don't continue if rgb values are invalid
         foreach (array(
@@ -310,8 +310,16 @@ class SetLightState implements CommandInterface, ActionableInterface
         }
 
         $xy = ColorConversion::convertRGBToXY($red, $green, $blue);
-
-        return $this->xy($xy['x'], $xy['y'])->brightness($xy['bri']);
+	    if($bri!==null){
+		    if($bri<0)
+			    $bri=0;
+		    elseif($bri>255)
+			    $bri=255;
+	    }
+	    else{
+		    $bri = $xy['bri'];
+	    }
+        return $this->xy($xy['x'], $xy['y'])->brightness($bri);
     }
 
     /**

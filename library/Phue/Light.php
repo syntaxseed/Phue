@@ -396,7 +396,7 @@ class Light implements LightInterface
     public function setRGB($red, $green, $blue,$bri=null)
     {
         $x = new SetLightState($this);
-        $y = $x->rgb((int) $red, (int) $green, (int) $blue);
+        $y = $x->rgb((int) $red, (int) $green, (int) $blue,$bri);
         $this->updateTransition($x);
         $this->client->sendCommand($y);
 
