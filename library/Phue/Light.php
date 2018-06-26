@@ -381,7 +381,7 @@ class Light implements LightInterface {
         $this->attributes->state->xy = [
             $xy['x'],
             $xy['y']
-        );
+        ];
         if($bri!==null){
         	if($bri<0)
         		$bri=0;
@@ -397,19 +397,19 @@ class Light implements LightInterface {
         return $this;
     }
 
-	/**
-	 * @param $time float Seconds
-	 */
-	public function setTransition($time)
-	{
-		$this->transition=$time;
+    /**
+    * @param $time float Seconds
+    */
+    public function setTransition($time)
+    {
+    	$this->transition=$time;
     }
 
-	private function updateTransition(SetLightState $x)
-	{
-		if($this->transition!==null){
-			$x->transitionTime($this->transition);
-		}
+    private function updateTransition(SetLightState $x)
+    {
+    	if($this->transition!==null){
+    		$x->transitionTime($this->transition);
+    	}
     }
 
     /**
