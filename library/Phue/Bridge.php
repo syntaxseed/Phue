@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2012 Michael K. Squires
  * @license   http://github.com/sqmk/Phue/wiki/License
  */
+
 namespace Phue;
 
 use Phue\Command\SetBridgeConfig;
@@ -13,8 +14,7 @@ use Phue\Command\SetBridgeConfig;
 /**
  * Bridge object
  */
-class Bridge
-{
+class Bridge {
 
     /**
      * Bridge attributes
@@ -35,11 +35,10 @@ class Bridge
      *
      * @param \stdClass $attributes
      *            Bridge attributes
-     * @param Client $client
+     * @param Client    $client
      *            Phue client
      */
-    public function __construct(\stdClass $attributes, Client $client)
-    {
+    public function __construct(\stdClass $attributes, Client $client) {
         $this->attributes = $attributes;
         $this->client = $client;
     }
@@ -49,8 +48,7 @@ class Bridge
      *
      * @return string Bridge name
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->attributes->name;
     }
 
@@ -62,8 +60,7 @@ class Bridge
      *
      * @return self This object
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->client->sendCommand(
             new SetBridgeConfig(
                 [
@@ -71,10 +68,10 @@ class Bridge
                 ]
             )
         );
-        
-                $this->attributes->name = (string) $name;
-        
-                return $this;
+
+        $this->attributes->name = (string) $name;
+
+        return $this;
     }
 
     /**
@@ -82,8 +79,7 @@ class Bridge
      *
      * @return int ZygBee Channel
      */
-    public function getZigBeeChannel()
-    {
+    public function getZigBeeChannel() {
         return $this->attributes->zigbeechannel;
     }
 
@@ -95,16 +91,15 @@ class Bridge
      *
      * @return self This object
      */
-    public function setZigBeeChannel($channel)
-    {
+    public function setZigBeeChannel($channel) {
         $this->client->sendCommand(
             new SetBridgeConfig(
-                array('zigbeechannel' => (int) $channel)
+                ['zigbeechannel' => (int) $channel]
             )
         );
-        
+
         $this->attributes->zigbeechannel = (int) $channel;
-        
+
         return $this;
     }
 
@@ -113,8 +108,7 @@ class Bridge
      *
      * @return string MAC address
      */
-    public function getMacAddress()
-    {
+    public function getMacAddress() {
         return $this->attributes->mac;
     }
 
@@ -123,8 +117,7 @@ class Bridge
      *
      * @return bool True if DHCP is enabled, false if not
      */
-    public function isDhcpEnabled()
-    {
+    public function isDhcpEnabled() {
         return (bool) $this->attributes->dhcp;
     }
 
@@ -136,19 +129,18 @@ class Bridge
      *
      * @return self This object
      */
-    public function enableDhcp($state = true)
-    {
+    public function enableDhcp($state = TRUE) {
         $this->client->sendCommand(
             new SetBridgeConfig(
-                array(
-                    'dhcp' => (bool) $state
-                )
+                [
+                    'dhcp' => (bool) $state,
+                ]
             )
         );
-        
-                $this->attributes->dhcp = (bool) $state;
-        
-                return $this;
+
+        $this->attributes->dhcp = (bool) $state;
+
+        return $this;
     }
 
     /**
@@ -156,8 +148,7 @@ class Bridge
      *
      * @return string IP address
      */
-    public function getIpAddress()
-    {
+    public function getIpAddress() {
         return $this->attributes->ipaddress;
     }
 
@@ -169,19 +160,18 @@ class Bridge
      *
      * @return self This object
      */
-    public function setIpAddress($ipAddress)
-    {
+    public function setIpAddress($ipAddress) {
         $this->client->sendCommand(
             new SetBridgeConfig(
-                array(
-                    'ipaddress' => (string) $ipAddress
-                )
+                [
+                    'ipaddress' => (string) $ipAddress,
+                ]
             )
         );
-        
-                $this->attributes->ipaddress = (string) $ipAddress;
-        
-                return $this;
+
+        $this->attributes->ipaddress = (string) $ipAddress;
+
+        return $this;
     }
 
     /**
@@ -189,8 +179,7 @@ class Bridge
      *
      * @return string Netmask
      */
-    public function getNetmask()
-    {
+    public function getNetmask() {
         return $this->attributes->netmask;
     }
 
@@ -202,19 +191,18 @@ class Bridge
      *
      * @return self This object
      */
-    public function setNetmask($netmask)
-    {
+    public function setNetmask($netmask) {
         $this->client->sendCommand(
             new SetBridgeConfig(
-                array(
-                    'netmask' => (string) $netmask
-                )
+                [
+                    'netmask' => (string) $netmask,
+                ]
             )
         );
-        
-                $this->attributes->netmask = (string) $netmask;
-        
-                return $this;
+
+        $this->attributes->netmask = (string) $netmask;
+
+        return $this;
     }
 
     /**
@@ -222,8 +210,7 @@ class Bridge
      *
      * @return string Gateway address
      */
-    public function getGateway()
-    {
+    public function getGateway() {
         return $this->attributes->gateway;
     }
 
@@ -235,19 +222,18 @@ class Bridge
      *
      * @return self This object
      */
-    public function setGateway($gateway)
-    {
+    public function setGateway($gateway) {
         $this->client->sendCommand(
             new SetBridgeConfig(
-                array(
-                    'gateway' => (string) $gateway
-                )
+                [
+                    'gateway' => (string) $gateway,
+                ]
             )
         );
-        
-                $this->attributes->gateway = (string) $gateway;
-        
-                return $this;
+
+        $this->attributes->gateway = (string) $gateway;
+
+        return $this;
     }
 
     /**
@@ -255,8 +241,7 @@ class Bridge
      *
      * @return string Proxy address
      */
-    public function getProxyAddress()
-    {
+    public function getProxyAddress() {
         return $this->attributes->proxyaddress;
     }
 
@@ -271,18 +256,18 @@ class Bridge
     public function setProxyAddress(
         $proxyAddress = SetBridgeConfig::DEFAULT_PROXY_ADDRESS
     ) {
-    
+
         $this->client->sendCommand(
             new SetBridgeConfig(
-                array(
-                    'proxyaddress' => (string) $proxyAddress
-                )
+                [
+                    'proxyaddress' => (string) $proxyAddress,
+                ]
             )
         );
-        
-                $this->attributes->proxyaddress = (string) $proxyAddress;
-        
-                return $this;
+
+        $this->attributes->proxyaddress = (string) $proxyAddress;
+
+        return $this;
     }
 
     /**
@@ -290,8 +275,7 @@ class Bridge
      *
      * @return string Proxy port
      */
-    public function getProxyPort()
-    {
+    public function getProxyPort() {
         return $this->attributes->proxyport;
     }
 
@@ -303,20 +287,19 @@ class Bridge
      *
      * @return self This object
      */
-    public function setProxyPort($proxyPort = SetBridgeConfig::DEFAULT_PROXY_PORT)
-    {
+    public function setProxyPort($proxyPort = SetBridgeConfig::DEFAULT_PROXY_PORT) {
         $this->client->sendCommand(
             new SetBridgeConfig(
-                // ['proxyport' => (int) $proxyPort]
-                array(
-                    'proxyport' => (int) $proxyPort
-                )
+            // ['proxyport' => (int) $proxyPort]
+                [
+                    'proxyport' => (int) $proxyPort,
+                ]
             )
         );
-        
-                $this->attributes->proxyport = (int) $proxyPort;
-        
-                return $this;
+
+        $this->attributes->proxyport = (int) $proxyPort;
+
+        return $this;
     }
 
     /**
@@ -324,8 +307,7 @@ class Bridge
      *
      * @return string Date
      */
-    public function getUtcTime()
-    {
+    public function getUtcTime() {
         return $this->attributes->UTC;
     }
 
@@ -334,8 +316,7 @@ class Bridge
      *
      * @return string Date
      */
-    public function getLocalTime()
-    {
+    public function getLocalTime() {
         return $this->attributes->localtime;
     }
 
@@ -344,8 +325,7 @@ class Bridge
      *
      * @return string Date
      */
-    public function getTimezone()
-    {
+    public function getTimezone() {
         return $this->attributes->timezone;
     }
 
@@ -357,19 +337,18 @@ class Bridge
      *
      * @return self This object
      */
-    public function setTimezone($timezone)
-    {
+    public function setTimezone($timezone) {
         $this->client->sendCommand(
             new SetBridgeConfig(
-                array(
-                    'timezone' => (string) $timezone
-                )
+                [
+                    'timezone' => (string) $timezone,
+                ]
             )
         );
-        
-                $this->attributes->timezone = (string) $timezone;
-        
-                return $this;
+
+        $this->attributes->timezone = (string) $timezone;
+
+        return $this;
     }
 
     /**
@@ -377,8 +356,7 @@ class Bridge
      *
      * @return string Software version
      */
-    public function getSoftwareVersion()
-    {
+    public function getSoftwareVersion() {
         return $this->attributes->swversion;
     }
 
@@ -387,8 +365,7 @@ class Bridge
      *
      * @return string API Version
      */
-    public function getApiVersion()
-    {
+    public function getApiVersion() {
         return $this->attributes->apiversion;
     }
 
@@ -397,8 +374,7 @@ class Bridge
      *
      * @return SoftwareUpdate SoftwareUpdate object
      */
-    public function getSoftwareUpdate()
-    {
+    public function getSoftwareUpdate() {
         return new SoftwareUpdate($this->attributes->swupdate, $this->client);
     }
 
@@ -407,8 +383,7 @@ class Bridge
      *
      * @return bool True if the link button on, false if not
      */
-    public function isLinkButtonOn()
-    {
+    public function isLinkButtonOn() {
         return (bool) $this->attributes->linkbutton;
     }
 
@@ -420,19 +395,18 @@ class Bridge
      *
      * @return self This object
      */
-    public function setLinkButtonOn($state = true)
-    {
+    public function setLinkButtonOn($state = TRUE) {
         $this->client->sendCommand(
             new SetBridgeConfig(
-                array(
-                    'linkbutton' => (bool) $state
-                )
+                [
+                    'linkbutton' => (bool) $state,
+                ]
             )
         );
-        
-                $this->attributes->linkbutton = (bool) $state;
-        
-                return $this;
+
+        $this->attributes->linkbutton = (bool) $state;
+
+        return $this;
     }
 
     /**
@@ -440,8 +414,7 @@ class Bridge
      *
      * @return bool True if services are on, false if not
      */
-    public function arePortalServicesEnabled()
-    {
+    public function arePortalServicesEnabled() {
         return (bool) $this->attributes->portalservices;
     }
 
@@ -450,8 +423,7 @@ class Bridge
      *
      * @return bool True if portal is connected, false if not
      */
-    public function isPortalConnected()
-    {
+    public function isPortalConnected() {
         return $this->attributes->portalconnection == 'connected';
     }
 
@@ -460,8 +432,7 @@ class Bridge
      *
      * @return Portal Portal object
      */
-    public function getPortal()
-    {
+    public function getPortal() {
         return new Portal($this->attributes->portalstate, $this->client);
     }
 }
