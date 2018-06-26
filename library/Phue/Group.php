@@ -381,7 +381,7 @@ class Group implements LightInterface
 	        $this->attributes->action->bri = $bri;
         }
         else{
-	        $this->attributes->action->bri = $xy['bri'];
+	        $this->attributes->action->bri = max($red, $green, $blue);
         }
 
         $this->attributes->action->colormode = 'xy';

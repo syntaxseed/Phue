@@ -390,7 +390,7 @@ class Light implements LightInterface {
 	        $this->attributes->state->bri = $bri;
         }
         else{
-	        $this->attributes->state->bri = $xy['bri'];
+	        $this->attributes->state->bri = max($red, $green, $blue);
         }
         $this->attributes->state->colormode = 'xy';
 
