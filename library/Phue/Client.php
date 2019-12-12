@@ -99,7 +99,7 @@ class Client {
      *
      * @return self This object
      */
-    public function setUsername(string $username) : Client {
+    public function setUsername(?string $username) : Client {
         $this->username = (string) $username;
         return $this;
     }
