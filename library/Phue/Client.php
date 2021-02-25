@@ -31,21 +31,21 @@ class Client {
      *
      * @var string
      */
-    protected $host;
+    protected string $host;
 
     /**
      * Username
      *
      * @var string
      */
-    protected $username;
+    protected string $username;
 
     /**
      * Transport
      *
      * @var TransportInterface
      */
-    protected $transport;
+    protected TransportInterface $transport;
 
     /**
      * Construct a Phue Client
