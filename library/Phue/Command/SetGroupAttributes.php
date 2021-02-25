@@ -29,7 +29,7 @@ class SetGroupAttributes implements CommandInterface
      *
      * @var array
      */
-    protected $attributes = array();
+    protected array $attributes = [];
 
     /**
      * Constructs a command
