@@ -23,7 +23,7 @@ class ColorConversion
      *
      * @return array x, y, bri key/value
      */
-    public static function convertRGBToXY($red, $green, $blue)
+    public static function convertRGBToXY(int $red, int $green, int $blue)
     {
         // Normalize the values to 1
         $normalizedToOne['red'] = $red / 255;
@@ -33,7 +33,7 @@ class ColorConversion
         // Make colors more vivid
         foreach ($normalizedToOne as $key => $normalized) {
             if ($normalized > 0.04045) {
-                $color[$key] = pow(($normalized + 0.055) / (1.0 + 0.055), 2.4);
+                $color[$key] = (($normalized + 0.055) / (1.0 + 0.055)) ** 2.4;
             } else {
                 $color[$key] = $normalized / 12.92;
             }
@@ -69,7 +69,7 @@ class ColorConversion
      *
      * @return array red, green, blue key/value
      */
-    public static function convertXYToRGB($x, $y, $bri = 255)
+    public static function convertXYToRGB(float $x, float $y, int $bri = 255)
     {
         // Calculate XYZ
         $z = 1.0 - $x - $y;
@@ -92,7 +92,7 @@ class ColorConversion
             if ($normalized <= 0.0031308) {
                 $color[$key] = 12.92 * $normalized;
             } else {
-                $color[$key] = (1.0 + 0.055) * pow($normalized, 1.0 / 2.4) - 0.055;
+                $color[$key] = (1.0 + 0.055) * ($normalized ** (1.0 / 2.4)) - 0.055;
             }
             $color[$key] = max(0, $color[$key]);
             if ($maxValue < $color[$key]) {
