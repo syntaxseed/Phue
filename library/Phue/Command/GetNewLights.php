@@ -21,14 +21,14 @@ class GetNewLights implements CommandInterface
      *
      * @var string
      */
-    protected $lastScan;
+    protected string $lastScan;
 
     /**
      * Found lights
      *
      * @var array
      */
-    protected $lights = array();
+    protected array $lights = [];
 
     /**
      * Send command
@@ -75,6 +75,6 @@ class GetNewLights implements CommandInterface
      */
     public function isScanActive()
     {
-        return $this->lastScan == 'active';
+        return $this->lastScan === 'active';
     }
 }
