@@ -20,9 +20,9 @@ class GetLightById implements CommandInterface
     /**
      * Light Id
      *
-     * @var string
+     * @var int
      */
-    protected $lightId;
+    protected int $lightId;
 
     /**
      * Constructs a command
