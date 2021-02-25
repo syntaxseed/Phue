@@ -29,7 +29,7 @@ class CreateGroup implements CommandInterface
      *
      * @var array List of light Ids
      */
-    protected $lights = array();
+    protected $lights = [];
 
     /**
      * Constructs a command
@@ -39,7 +39,7 @@ class CreateGroup implements CommandInterface
      * @param array $lights
      *            List of light Ids or Light objects
      */
-    public function __construct($name, array $lights = array())
+    public function __construct($name, array $lights = [])
     {
         $this->name($name);
         $this->lights($lights);
@@ -68,9 +68,9 @@ class CreateGroup implements CommandInterface
      *
      * @return self This object
      */
-    public function lights(array $lights = array())
+    public function lights(array $lights = [])
     {
-        $this->lights = array();
+        $this->lights = [];
         
         // Iterate through each light and append id to group list
         foreach ($lights as $light) {
