@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection PhpMissingParentConstructorInspection */
+
 /**
  * Phue: Philips Hue PHP Client
  *
@@ -14,8 +15,7 @@ use Phue\Transport\TransportInterface;
 /**
  * Set group action command
  */
-class SetGroupState extends SetLightState implements ActionableInterface
-{
+class SetGroupState extends SetLightState {
 
     /**
      * Group Id
@@ -27,8 +27,8 @@ class SetGroupState extends SetLightState implements ActionableInterface
     /**
      * Constructs a command
      *
-     * @param mixed $group
-     *            Group Id or Group object
+     * @param mixed $group Group Id or Group object
+     * @noinspection MagicMethodsValidityInspection
      */
     public function __construct($group)
     {
