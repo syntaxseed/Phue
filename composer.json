@@ -28,7 +28,7 @@
     },
     "require-dev": {
         "mockery/mockery": "1.*",
-        "phpunit/PHPUnit": "9.*"
+        "phpunit/phpunit": "9.*"
     },
     "suggest": {
         "ext-curl": "Allows usage of cURL transport adapter"
