@@ -1,7 +1,7 @@
 {
 
-    "name": "neoteknic/phue",
-    "description": "Phue - Philips Hue PHP client - Fork by Neoteknic - extra features",
+    "name": "syntaxseed/phue",
+    "description": "Phue - Philips Hue PHP client - Fork by SyntaxSeed - extra features, bug fixes.",
     "type": "library",
     "keywords": [
         "phue",
@@ -9,7 +9,7 @@
         "hue",
         "client"
     ],
-    "homepage": "https://github.com/neoteknic/Phue",
+    "homepage": "https://github.com/syntaxseed/Phue",
     "license": "BSD-3-Clause",
     "authors": [
         {
@@ -21,7 +21,11 @@
             "name":  "Jens Reinemuth",
             "email": "jens@reinemuth.rocks",
             "role":  "developer"
-        }
+        },
+        {
+            "name": "Sherri Wheeler",
+            "role": "developer"
+        },
     ],
     "require": {
         "php": "7.4.*|8.*"

@@ -1,11 +1,13 @@
-# Phue - Philips Hue client - fork by Neoteknic
+# Phue - Philips Hue client - fork by SyntaxSeed
 
-[![Latest OrigStable Version](https://poser.pugx.org/neoteknic/Phue/version)](https://packagist.org/packages/neoteknic/Phue)
+[![Latest OrigStable Version](https://poser.pugx.org/syntaxseed/Phue/version)](https://packagist.org/packages/syntaxseed/Phue)
 
 
 ## Introduction
 
-Phue is a PHP client used to connect to and manage the Philips Hue lighting system.
+Phue is a PHP client used to connect to and manage the Philips Hue lighting system. This package uses the Hue API version 1.
+
+**NOTICE:** This project is a fork of `neoteknic/Phue` which is in turn a fork of `sqmk/Phue`. This documentation may contain incorrect package names.
 
 It is currently registered with Packagist so that this library can easily be included in other projects. For example, one may want to bundle this library with Zend Framework or Symfony to build their own front-end for the Hue system.
 
@@ -24,14 +26,14 @@ Interested in API docs? You can check out the [Philips API documentation](http:/
 
 ## Requirements
 
-* PHP 7.1+
+* PHP 7.1+, 8.0+
 * cURL extension (optional)
 
-For old php support please use the original package sqmk/Phue
+For old php support please use the original package by `sqmk/Phue`.
 
 ## Installation
 
-The Phue library is available in Packagist. You'll want to include ```sqmk/phue``` as a dependency in your project using composer. If you are not familiar with composer, check it out here: [Composer](http://getcomposer.org)
+The Phue library is available in Packagist. You'll want to include ```syntaxseed/phue``` as a dependency in your project using composer. If you are not familiar with composer, check it out here: [Composer](http://getcomposer.org)
 
 You can also use this library without composer. The library directory is ```library```. You'll want to map your namespace ```Phue``` to this directory in your autoloader of choice.
 
@@ -58,7 +60,7 @@ Here's how to instantiate a client object:
 ```php
 <?php
 
-$client = new \Phue\Client('10.0.1.31', 'sqmk');
+$client = new \Phue\Client('10.0.1.31', 'yourbridgeusername');
 ```
 
 ### Issuing commands, testing connection and authorization
@@ -162,7 +164,7 @@ Now that you can retrieve ```\Phue\Light``` objects, you can start manipulating 
 
 ```php
 // Get a specific light
-$lights = $client->getLights(); 
+$lights = $client->getLights();
 $light = $lights[3];
 
 // Retrieving light properties:
@@ -221,7 +223,7 @@ Each *set* method above issues a single request to the bridge. In order to updat
 
 ```php
 // Retrieve light
-$lights = $client->getLights(); 
+$lights = $client->getLights();
 $light = $lights[3];
 
 // Setting the brightness, hue, and saturation at the same time
@@ -254,7 +256,7 @@ $groupId = $client->sendCommand(
 	new \Phue\Command\CreateGroup('Office Lights', array(1, 2))
 );
 
-$groups = $client->getGroups(); 
+$groups = $client->getGroups();
 $group = $groups[$groupId];
 
 // Create group with list of lights, and get group
@@ -268,7 +270,7 @@ $groupId2 = $client->sendCommand(
 	)
 );
 
-$groups = $client->getGroups(); 
+$groups = $client->getGroups();
 $group = $groups[$groupId2];
 ```
 
@@ -292,7 +294,7 @@ foreach ($groups as $groupId => $group) {
 }
 
 // Convenient way of retrieving a single group by id
-$groups = $client->getGroups(); 
+$groups = $client->getGroups();
 $group = $groups[1];
 
 echo $group->getId(), ' - ',
@@ -311,7 +313,7 @@ Most of the methods available on ```\Phue\Light``` objects are also available on
 
 ```php
 // Get a specific group
-$groups = $client->getGroups(); 
+$groups = $client->getGroups();
 $group = $groups[1];
 
 // Retrieving group properties:
@@ -335,7 +337,7 @@ echo $group->getId(), "\n",
 $group->setName('Office');
 
 // Setting lights
-$lights = $client->getLights(); 
+$lights = $client->getLights();
 $group->setLights(array(
     $lights[1],
     $lights[2]
@@ -371,7 +373,7 @@ Just like the bulbs, each *set* method on the ```\Phue\Group``` object will send
 
 ```php
 // Retrieve group
-$groups = $client->getGroups(); 
+$groups = $client->getGroups();
 $group = $groups[1];
 
 // Setting the brightness, color temp, and transition at the same time
@@ -390,7 +392,7 @@ Deleting a group is also simple. You can either delete from the ```\Phue\Group``
 
 ```php
 // Retrieve group and delete
-$groups = $client->getGroups(); 
+$groups = $client->getGroups();
 $group = $groups[1];
 $group->delete();
 
@@ -450,7 +452,7 @@ foreach ($client->getSchedules() as $scheduleId => $schedule) {
 }
 
 // Delete a given schedule
-$schedules = $client->getSchedules(); 
+$schedules = $client->getSchedules();
 $schedule = $schedules[2];
 $schedule->delete();
 ```
@@ -512,7 +514,7 @@ Number of bridges found: 1
 
 The internal IP address(es) listed in the results is what you need for the Phue client.
 
-If the script provided doesn't find your bridge, or if you don't have internet connection on your network, I have created a wiki page that describes a few other convenient ways of finding it: [Finding Philips Hue bridge on network](/sqmk/Phue/wiki/Finding-Philips-Hue-bridge-on-network).
+If the script provided doesn't find your bridge, or if you don't have internet connection on your network, I have created a wiki page that describes a few other convenient ways of finding it: [Finding Philips Hue bridge on network](/neoteknic/Phue/wiki/Finding-Philips-Hue-bridge-on-network).
 
 ### Authentication / Creating a User
 
@@ -543,7 +545,7 @@ Attempting to create user:
 Press the Bridge's button!
 Waiting..........
 
-Successfully created new user: abcdef0123456 
+Successfully created new user: abcdef0123456
 ```
 
 From then on, you should be able to use the username generated for interacting with the Philips Hue bridge!
