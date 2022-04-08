@@ -25,7 +25,7 @@
         {
             "name": "Sherri Wheeler",
             "role": "developer"
-        },
+        }
     ],
     "require": {
         "php": "7.4.*|8.*"
