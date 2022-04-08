@@ -1,6 +1,6 @@
 # Phue - Philips Hue client - fork by SyntaxSeed
 
-[![Latest OrigStable Version](https://poser.pugx.org/syntaxseed/Phue/version)](https://packagist.org/packages/syntaxseed/Phue)
+[![Latest OrigStable Version](https://poser.pugx.org/syntaxseed/phue/version)](https://packagist.org/packages/syntaxseed/phue)
 
 
 ## Introduction
