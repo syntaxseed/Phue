@@ -55,21 +55,21 @@ class Streaming implements AdapterInterface
             'ignore_errors' => true,
             'method' => $method
         );
-        
+
         // Set body if there is one
         if (strlen($body)) {
             $streamOptions['content'] = $body;
         }
-        
+
         $this->streamContext = stream_context_create(
             array(
                 'http' => $streamOptions
             )
         );
-        
+
         // Make request
             $this->fileStream = @fopen($address, 'r', false, $this->streamContext);
-        
+
             return $this->fileStream ? stream_get_contents($this->fileStream) : false;
     }
 
@@ -81,7 +81,7 @@ class Streaming implements AdapterInterface
     public function getHttpStatusCode()
     {
         preg_match('#^HTTP/1\.1 (\d+)#mi', $this->getHeaders(), $matches);
-        
+
         return isset($matches[1]) ? $matches[1] : false;
     }
 
@@ -93,7 +93,7 @@ class Streaming implements AdapterInterface
     public function getContentType()
     {
         preg_match('#^Content-type: ([^;]+?)$#mi', $this->getHeaders(), $matches);
-        
+
         return isset($matches[1]) ? $matches[1] : false;
     }
 
@@ -108,11 +108,11 @@ class Streaming implements AdapterInterface
         if (! $this->fileStream) {
             return;
         }
-        
+
         $meta_data = stream_get_meta_data($this->fileStream);
         return implode(
-            $meta_data['wrapper_data'],
-            "\r\n"
+            "\r\n",
+            $meta_data['wrapper_data']
         );
     }
 
@@ -124,7 +124,7 @@ class Streaming implements AdapterInterface
         if (is_resource($this->fileStream)) {
             fclose($this->fileStream);
         }
-        
+
         $this->streamContext = null;
     }
 }
